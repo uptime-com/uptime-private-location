@@ -10,7 +10,7 @@
 
 4. Download `seccomp-config.json` to the working directory.
 
-5. Log in to your Docker Hub (use `docker login`) with the credentials provided
+5. Log in to your Docker Hub (use `docker login`) with your Docker Hub credentials
 
 6. Pull the latest image (use `docker pull uptimecom/uptime-private-location:latest`)
 
@@ -38,6 +38,13 @@ docker run -it \
 
 - Get the PID of a running container with the command: `docker ps`
 - Run `docker kill PID_OF_THE_RUNNING_CONTAINER`
+
+
+
+## Memory and CPU requirements
+
+- At least 1GB of memory is required (2-3GB is recommended) for the container to successfully run multiple transaction checks
+- At least 2 CPU cores is recommended
 
 
 
