@@ -1,6 +1,6 @@
 # Running an Uptime.com Private Location Monitoring Server with Docker
 
-The most current and up-to-date information can be found at https://support.uptime.com/hc/en-us/articles/360012622239-Private-Location-Monitoring-Setup-and-Troubleshooting#prerequisites .
+The most current and up-to-date information can be found at https://support.uptime.com/hc/en-us/articles/360012622239-Private-Location-Monitoring-Setup-and-Troubleshooting .
 
 ## Prerequisites
 
