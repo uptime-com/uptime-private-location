@@ -1,5 +1,7 @@
 # Running an Uptime.com Private Location Monitoring Server with Docker
 
+The most current and up-to-date information can be found at https://support.uptime.com/hc/en-us/articles/360012622239-Private-Location-Monitoring-Setup-and-Troubleshooting#prerequisites .
+
 ## Prerequisites
 
 1. Docker v. 18+
@@ -23,7 +25,6 @@ Start the container with the command:
 ```bash
 docker run -it \
     --env UPTIME_API_TOKEN="YOUR_UPTIME_API_TOKEN" \
-    --mount type=bind,source=/sys/fs/cgroup,target=/sys/fs/cgroup \
     --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
     --mount type=volume,dst=/usr/local/nagios/var/,src=uptime-nagios-var \
     --mount type=volume,dst=/home/webapps/uptime/logs/,src=uptime-logs \
