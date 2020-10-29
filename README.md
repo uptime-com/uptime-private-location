@@ -25,6 +25,7 @@ Start the container with the command:
 ```bash
 docker run -it \
     --env UPTIME_API_TOKEN="YOUR_UPTIME_API_TOKEN" \
+    --shm-size=2048m \
     --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
     --mount type=volume,dst=/usr/local/nagios/var/,src=uptime-nagios-var \
     --mount type=volume,dst=/home/webapps/uptime/logs/,src=uptime-logs \
@@ -67,6 +68,7 @@ It is possible to check the status of a running container, either by exposing a 
      ```bash
      docker run -it \
          --env UPTIME_API_TOKEN="YOUR_UPTIME_API_TOKEN" \
+         --shm-size=2048m \
          --mount type=bind,source=/sys/fs/cgroup,target=/sys/fs/cgroup \
          --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
          --mount type=volume,dst=/usr/local/nagios/var/,src=uptime-nagios-var \
