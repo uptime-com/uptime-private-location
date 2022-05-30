@@ -32,7 +32,7 @@ docker run -it \
     --mount type=volume,dst=/home/webapps/uptime/data/,src=uptime-data \
     --security-opt seccomp=./seccomp-config.json \
     --hostname localhost \
-    uptimecom/uptime-private-location:2.1
+    uptimecom/uptime-private-location:2.2
 
 ```
 
@@ -49,6 +49,7 @@ official Docker documentation https://docs.docker.com/network/proxy/.
 ## Memory and CPU requirements
 
 - At least 1GB of memory is required (2-3GB is recommended) for the container to successfully run multiple transaction checks
+- At least 15GB of free disk space
 - At least 2 CPU cores is recommended
 
 ## Status and Troubleshooting
@@ -70,7 +71,6 @@ It is possible to check the status of a running container, either by exposing a 
      docker run -it \
          --env UPTIME_API_TOKEN="YOUR_UPTIME_API_TOKEN" \
          --shm-size=2048m \
-         --mount type=bind,source=/sys/fs/cgroup,target=/sys/fs/cgroup \
          --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
          --mount type=volume,dst=/usr/local/nagios/var/,src=uptime-nagios-var \
          --mount type=volume,dst=/home/webapps/uptime/logs/,src=uptime-logs \
@@ -78,7 +78,7 @@ It is possible to check the status of a running container, either by exposing a 
          --security-opt seccomp=./seccomp-config.json \
          --hostname localhost \
          -p 8003:443 \
-         uptimecom/uptime-private-location:2.1
+         uptimecom/uptime-private-location:2.2
      ```
 
    - Make a HTTP(S) call to `https://localhost:8003/status`; below is a cURL example:
