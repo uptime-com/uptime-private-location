@@ -9,4 +9,4 @@ docker run -it \
     --mount type=volume,dst=/home/webapps/uptime/data/,src=uptime-data \
     --security-opt seccomp=./seccomp-config.json \
     --hostname localhost \
-    uptimecom/uptime-private-location:2.1
+    uptimecom/uptime-private-location:2.3

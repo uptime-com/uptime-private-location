@@ -32,7 +32,7 @@ docker run -it \
     --mount type=volume,dst=/home/webapps/uptime/data/,src=uptime-data \
     --security-opt seccomp=./seccomp-config.json \
     --hostname localhost \
-    uptimecom/uptime-private-location:2.2
+    uptimecom/uptime-private-location:2.3
 
 ```
 
@@ -78,7 +78,7 @@ It is possible to check the status of a running container, either by exposing a 
          --security-opt seccomp=./seccomp-config.json \
          --hostname localhost \
          -p 8003:443 \
-         uptimecom/uptime-private-location:2.2
+         uptimecom/uptime-private-location:2.3
      ```
 
    - Make a HTTP(S) call to `https://localhost:8003/status`; below is a cURL example:
