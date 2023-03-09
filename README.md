@@ -26,7 +26,7 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 
 1. Download raw `seccomp-config.json` file [here](https://raw.githubusercontent.com/uptime-com/uptime-private-location/master/seccomp-config.json), right click “Save Page As…”, save to working directory
 2. Login with Docker credentials via `docker login`
-3. Pull latest image 2.4 via `docker pull uptimecom/uptime-private-location:2.4`
+3. Pull latest image 2.5 via `docker pull uptimecom/uptime-private-location:2.4`
 4. Start the container via
 
 	```
@@ -63,10 +63,10 @@ Once configured, confirm that the container can access `internal.uptime.com:443`
 
 ### Pull Latest Image
 
-**Please note**: Containers running outdated images (2.3 or less) may experience errors. 
+**Please note**: Containers running outdated images (2.4 or less) may experience errors. 
 
 1. Login via `docker login`
-2. Run `docker pull uptimecom/uptime-private-location:2.4`
+2. Run `docker pull uptimecom/uptime-private-location:2.5`
 
 ## Troubleshooting (via CLI)
 
@@ -88,7 +88,7 @@ Check the status of a running container in a JSON payload via exposed port and H
     --security-opt seccomp=./seccomp-config.json \
     --hostname localhost \
     -p 8003:443 \
-    uptimecom/uptime-private-location:2.4
+    uptimecom/uptime-private-location:2.5
 	```
 3. Make HTTP(s) call to `https://localhost:8003/status`. Below is an example via cURL:
 
