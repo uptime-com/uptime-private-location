@@ -39,7 +39,7 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
     --mount type=volume,dst=/home/webapps/uptime/data/,src=uptime-data \
     --security-opt seccomp=./seccomp-config.json \
     --hostname localhost \
-    uptimecom/uptime-private-location:2.4
+    uptimecom/uptime-private-location:2.5
 	```
 
 **Please note**: Directly following container start, some tasks need time to settle. Some reconfiguration or stalled check detection errors may occur, but these should correct within ~1 hour after container start/restart.
