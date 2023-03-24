@@ -26,7 +26,7 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 
 1. Download raw `seccomp-config.json` file [here](https://raw.githubusercontent.com/uptime-com/uptime-private-location/master/seccomp-config.json), right click “Save Page As…”, save to working directory
 2. Login with Docker credentials via `docker login`
-3. Pull latest image 2.5 via `docker pull uptimecom/uptime-private-location:2.4`
+3. Pull latest image 2.5 via `docker pull uptimecom/uptime-private-location:2.5`
 4. Start the container via
 
 	```
