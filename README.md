@@ -52,6 +52,28 @@ To connect to a proxy server, make sure that the proxy is configured in the Dock
 Once configured, confirm that the container can access `internal.uptime.com:443` as well as `https://sqs.us-east-2.amazonaws.com/`
 
 
+## Upgrading from 2.x
+
+If you're currently running the 2.x line of Private Locations, there are some significant changes
+in this version which should be taken in consideration:
+
+- The data format has changed, so we recommend you delete any existing volumes from 2.x and start
+fresh when running 3.0 for the first time.
+
+- The `https://localhost:8003/status` URL no longer exists in 3.0, as it is not suitable for
+monitoring whether a Private Location is fully functional. For monitoring, we recommend you use
+one or more Heartbeat checks on Uptime.com, combined with a HTTP/API/Transaction check running
+on the private location which hits the Heartbeat URL. It is still possible to run the status
+script via the CLI as described below.
+
+- The new version runs as UID=1000, rather than UID=0 (`root`) that the 2.x line ran as. Please
+refrain from running it as a different user as it will fail. Ideally it should not be necessary
+to specify which UID to run as, it will default to the correct user.
+
+- It is no longer necessary or recommended to provide `--security-opt seccomp=./seccomp-config.json`
+when running this new version.
+
+
 ## Usage Commands (via CLI)
 
 ### Stopping the Container
