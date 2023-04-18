@@ -73,6 +73,10 @@ to specify which UID to run as, it will default to the correct user.
 - It is no longer necessary or recommended to provide `--security-opt seccomp=./seccomp-config.json`
 when running this new version.
 
+- Running Virus/Malware checks in a private location is no longer supported. This check does
+not require any access to internal resources, so there is no benefit from running it from
+a private location.
+
 
 ## Usage Commands (via CLI)
 
@@ -113,3 +117,13 @@ Check the status of a running container in a JSON payload via the CLI.
 
 ### Further Assistance
 For further troubleshooting help, see our [support article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring) or contact <support@uptime.com>
+
+
+## Running in Kubernetes
+
+It is possible to run the private location in Kubernetes, however please ensure you allocate
+sufficient CPU and memory resources to the deployment, otherwise Chrome-based tranaction
+checks will fail to run.
+
+A sample kubernetes configuration for the private location is available in
+`k8s-sample.yaml` for your reference.

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uptime-private-location-01
+  labels:
+    app: uptime-private-location-01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uptime-private-location-01
+  template:
+    metadata:
+      labels:
+        app: uptime-private-location-01
+    spec:
+      # 2GB ramdisk for shared memory is needed for fast Chrome user storage
+      volumes:
+        - emptyDir:
+            medium: Memory
+            sizeLimit: 2Gi
+          name: ramdisk
+
+      containers:
+        - name: uptime-private-location-01
+
+          # !!TODO!! Set desired image version
+          image: uptimecom/uptime-private-location:X.Y
+
+          # 2 CPU cores/4GB RAM are the minimum recommended settings for running Chromium
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1.0"
+            limits:
+              memory: "4Gi"
+              cpu: "2.0"
+
+          # Make the 2GB shared memory ramdisk available to the container at /dev/shm
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: ramdisk
+
+          ports:
+            - containerPort: 443
+
+          # !!TODO!! Set your Uptime.com Private Location API token here
+          env:
+            - name: UPTIME_API_TOKEN
+              value: "your-api-token"
