@@ -16,9 +16,9 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 
 1. Docker v18+
 2. Linux Ubuntu 20.04+
-    
+
     a. **Please note**: Linux kernel 4.x or 5.x required; Windows Hosts (Docker host, WSL, or VirtualBox) are not supported.
-    
+
 3. Access to Uptime.com private Docker repository (requested via Support, see [article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring#prerequisites_account)).
 4. API Key for each probe server (supplied via Support, see [article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring#prerequisites_pre_container)).
 
@@ -76,7 +76,7 @@ Check the status of a running container in a JSON payload via exposed port and H
 
 1. Stop the container (if running)
 2. Check the status of a running container in a JSON payload via exposed port `8003` and HTTP(s) call, or via CLI:
-	
+
 	```
 	docker run -it \
     --env UPTIME_API_TOKEN="YOUR_UPTIME_API_TOKEN" \
@@ -159,3 +159,9 @@ Either method will return a JSON payload. An example payload is here:
 ---
 
 For further troubleshooting help, see our [support article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring) or contact <support@uptime.com>
+
+
+## Kubernetes
+
+While not officially supported, a sample kubernetes configuration may be found
+in `k8s-sample.yaml` for reference.
