@@ -27,6 +27,12 @@ spec:
           # !!TODO!! Set desired image version
           image: uptimecom/uptime-private-location:X.Y
 
+          # CAP_NET_BIND_SERVICE is required to bind internally to ports 80 and 443
+          securityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+
           # 2 CPU cores/4GB RAM are the minimum recommended settings for running Chromium
           resources:
             requests:
