@@ -50,7 +50,10 @@ spec:
           ports:
             - containerPort: 443
 
-          # !!TODO!! Set your Uptime.com Private Location API token here
+          # !!TODO!! Set your Uptime.com Private Location API token here,
+          # and set the available CPU cores per the `resources.limits.cpu` setting.
           env:
             - name: UPTIME_API_TOKEN
               value: "your-api-token"
+            - name: UPTIME_AVAILABLE_CPU_CORES
+              value: "2"
