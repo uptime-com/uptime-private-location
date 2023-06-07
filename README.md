@@ -31,19 +31,23 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 2. Pull latest image via `docker pull uptimecom/uptime-private-location:X.Y`
 3. Start the container via
 
-	```
-	docker run --rm --detach \
-    --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
-    --shm-size=2048m \
-    --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
-    --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
-    --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
-    --mount type=volume,dst=/home/uptime/alerts,src=uptime-alerts \
-    --hostname localhost \
-    uptimecom/uptime-private-location:X.Y
-	```
+        docker run --rm --detach \
+        --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+        --shm-size=2048m \
+        --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
+        --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
+        --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
+        --mount type=volume,dst=/home/uptime/alerts,src=uptime-alerts \
+        --hostname localhost \
+        uptimecom/uptime-private-location:X.Y
 
 **Please note**: Directly following container start, some tasks need time to settle. Some reconfiguration or stalled check detection errors may occur, but these should correct within ~1 hour after container start/restart.
+
+### Older Docker Versions
+If you're running a Docker version older than 20.03 (check with `docker --version`),
+you'll need to add the following parameter to the `docker run` command above:
+
+    --sysctl net.ipv4.ip_unprivileged_port_start=0
 
 
 ### Using a Proxy Server
@@ -96,6 +100,12 @@ a private location.
 
 
 ## Troubleshooting
+
+### Viewing Startup Logs
+You can view the logs of the container's startup sequence to help diagnose errors.
+
+1. Get the PID of a running container via `docker ps`
+2. Run `docker logs -f <PID_OF_THE_RUNNING_CONTAINER>`
 
 ### Getting Private Location Status (via CLI)
 Check the status of a running container in a JSON payload via the CLI.
