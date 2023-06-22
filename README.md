@@ -137,3 +137,28 @@ checks will fail to run.
 
 A sample kubernetes configuration for the private location is available in
 `k8s-sample.yaml` for your reference.
+
+### Kubernetes Troubleshooting
+
+If you receive errors from the pod's log file indicating that apache failed to start
+(e.g. `gave up: apache entered FATAL state`), try adding an additional `securityContext`
+setting to your kubernetes yaml file, before `containers:`
+
+    spec:
+      ...
+
+      template:
+        ...
+
+        spec:
+          volumes:
+            ...
+
+          # *** Add this section *** #
+          securityContext:
+            sysctls:
+              - name: net.ipv4.ip_unprivileged_port_start
+                value: "0"
+
+          containers:
+            ...
