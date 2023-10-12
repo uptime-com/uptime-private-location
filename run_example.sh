@@ -8,4 +8,4 @@ docker run --rm --detach \
     --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
     --mount type=volume,dst=/home/uptime/alerts,src=uptime-alerts \
     --hostname localhost \
-    uptimecom/uptime-private-location:3.0
+    uptimecom/uptime-private-location:3.2
