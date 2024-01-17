@@ -28,8 +28,9 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 ## Installation Instructions
 
 1. Login with Docker credentials via `docker login`
-2. Pull latest image via `docker pull uptimecom/uptime-private-location:X.Y`
-3. Start the container via
+2. Retrieve latest stable image version [here](https://hub.docker.com/repository/docker/uptimecom/uptime-private-location/general).
+3. Pull latest image via `docker pull uptimecom/uptime-private-location:X.Y`
+4. Start the container via
 
         docker run --rm --detach \
         --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
