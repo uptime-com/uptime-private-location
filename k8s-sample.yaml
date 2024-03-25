@@ -14,12 +14,17 @@ spec:
       labels:
         app: uptime-private-location-01
     spec:
-      # 2GB ramdisk for shared memory is needed for fast Chrome user storage
+      # 2GB ramdisk for shared memory is needed for fast Chrome user storage,
+      # as well as a tmpfs for /home/uptime/run
       volumes:
         - emptyDir:
             medium: Memory
             sizeLimit: 2Gi
           name: ramdisk
+        - emptyDir:
+            medium: Memory
+            sizeLimit: 128Mi
+          name: tmpfs
 
       containers:
         - name: uptime-private-location-01
@@ -42,10 +47,13 @@ spec:
               memory: "4Gi"
               cpu: "2.0"
 
-          # Make the 2GB shared memory ramdisk available to the container at /dev/shm
+          # Make the 2GB shared memory ramdisk available to the container at /dev/shm,
+          # and the tmpfs available at /home/uptime/run
           volumeMounts:
             - mountPath: /dev/shm
               name: ramdisk
+            - mountPath: /home/uptime/run
+              name: tmpfs
 
           ports:
             - containerPort: 443

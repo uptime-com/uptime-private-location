@@ -33,16 +33,18 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 4. Start the container via
 
         docker run --rm --detach \
-        --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
-        --shm-size=2048m \
-        --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
-        --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
-        --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
-        --mount type=volume,dst=/home/uptime/alerts,src=uptime-alerts \
-        --hostname localhost \
-        uptimecom/uptime-private-location:X.Y
+            --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+            --shm-size=2048m \
+            --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
+            --mount type=volume,dst=/home/uptime/var,src=uptime-var \
+            --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
+            --tmpfs /home/uptime/run:uid=1000,gid=1000 \
+            --hostname localhost \
+            uptimecom/uptime-private-location:X.Y
 
-**Please note**: Directly following container start, some tasks need time to settle. Some reconfiguration or stalled check detection errors may occur, but these should correct within ~1 hour after container start/restart.
+**Please note**: Directly following container start, some tasks need time to settle.
+Some reconfiguration or stalled check detection errors may occur, but these should
+correct within ~1 hour after container start/restart.
 
 ### Older Docker Versions
 If you're running a Docker version older than 20.03 (check with `docker --version`),
@@ -51,10 +53,12 @@ you'll need to add the following parameter to the `docker run` command above:
     --sysctl net.ipv4.ip_unprivileged_port_start=0
 
 
-### Using a Proxy Server
+## Upgrading from 3.x
 
-To connect to a proxy server, make sure that the proxy is configured in the Docker client as described in the [Official Docker Guide](https://docs.docker.com/network/proxy/).
-Once configured, confirm that the container can access `internal.uptime.com:443` as well as `https://sqs.us-east-2.amazonaws.com/`
+**IMPORTANT!**
+Please note the run command and k8s sample configuration both contain important changes
+compared to version 3.x and will need to be updated per this document and the corresponding
+example files.
 
 
 ## Upgrading from 2.x
@@ -81,6 +85,12 @@ when running this new version. Please ensure you remove this from the startup co
 - Running Virus/Malware checks in a private location is no longer supported. This check does
 not require any access to internal resources, so there is no benefit from running it from
 a private location.
+
+
+### Using a Proxy Server
+
+To connect to a proxy server, make sure that the proxy is configured in the Docker client as described in the [Official Docker Guide](https://docs.docker.com/network/proxy/).
+Once configured, confirm that the container can access `internal.uptime.com:443` as well as `https://sqs.us-east-2.amazonaws.com/`
 
 
 ## Usage Commands (via CLI)
