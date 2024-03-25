@@ -33,14 +33,14 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 4. Start the container via
 
         docker run --rm --detach \
-        --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
-        --shm-size=2048m \
-        --mount type=volume,dst=/usr/local/nagios/etc/hosts,src=uptime-nagios-hosts \
-        --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
-        --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
-        --mount type=volume,dst=/home/uptime/alerts,src=uptime-alerts \
-        --hostname localhost \
-        uptimecom/uptime-private-location:X.Y
+            --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+            --shm-size=2048m \
+            --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
+            --mount type=volume,dst=/home/uptime/var,src=uptime-var \
+            --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
+            --tmpfs /home/uptime/run:uid=1000,gid=1000 \
+            --hostname localhost \
+            uptimecom/uptime-private-location:X.Y
 
 **Please note**: Directly following container start, some tasks need time to settle. Some reconfiguration or stalled check detection errors may occur, but these should correct within ~1 hour after container start/restart.
 
