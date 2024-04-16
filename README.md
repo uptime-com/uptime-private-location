@@ -46,11 +46,14 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 Some reconfiguration or stalled check detection errors may occur, but these should
 correct within ~1 hour after container start/restart.
 
-### Older Docker Versions
+### Older Docker Versions or Container Runtimes / Azure AKS
 If you're running a Docker version older than 20.03 (check with `docker --version`),
 you'll need to add the following parameter to the `docker run` command above:
 
     --sysctl net.ipv4.ip_unprivileged_port_start=0
+
+Kubernetes on Azure AKS also requires a similar configuration at this time. Please see the
+`k8s-sample.yaml` file and [Kubernetes section](#kubernetes-troubleshooting) below for details.
 
 
 ## Upgrading from 3.x
