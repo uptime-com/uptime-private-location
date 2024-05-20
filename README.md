@@ -133,6 +133,18 @@ Check the status of a running container in a JSON payload via the CLI.
    `docker exec <PID_OF_THE_RUNNING_CONTAINER> /home/uptime/status.sh | jq`
 
 
+### Reducing Memory Usage
+By default the container allocates 3 chrome browsers per available CPU for running
+transaction and page speed checks. If you have more than 2 CPUs allocated and/or you
+don't run large numbers of these checks on the private location, this may use more memory
+than necessary.
+
+It is possble to limit the number of chrome browsers allocated by setting the
+`UPTIME_AVAILABLE_CPU_CORES` environment variable via the docker run command used
+to start the container. For example:
+
+`--env UPTIME_AVAILABLE_CPU_CORES=2`
+
 ### Create a `backup.tgz` log file for troubleshooting
 1. Get the PID of a running container via `docker ps`
 2. Run `docker run --rm --volumes-from <RUNNING_CONTAINER_PID> -v $(pwd):/backup ubuntu:latest tar -zcvf /backup/backup.tgz /home/uptime/logs /usr/local/nagios/etc /usr/local/nagios/var`
