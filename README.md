@@ -2,6 +2,15 @@
 
 Use this README for technical requirements and CLI-based commands and troubleshooting.
 
+**Note: You are viewing the README for the latest version.**
+
+## Documentation for Different Versions
+
+- [Latest Version README](https://github.com/uptime-com/uptime-private-location/blob/master/README.md)
+- [v3.2 README](https://github.com/uptime-com/uptime-private-location/blob/v3.2/README.md)
+- [v3.0 README](https://github.com/uptime-com/uptime-private-location/blob/v3.0/README.md)
+---
+
 For pre-container setup, account prerequisites, and UI-based support, see our article [Getting Started with Private Location Monitoring](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring).
 
 
@@ -54,6 +63,37 @@ you'll need to add the following parameter to the `docker run` command above:
 
 Kubernetes on Azure AKS also requires a similar configuration at this time. Please see the
 `k8s-sample.yaml` file and [Kubernetes section](#kubernetes-troubleshooting) below for details.
+
+## Environment Variables
+
+**Use --env for docker run or add as env in kubernetes yaml file**
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center;">Name</th>
+      <th style="text-align:center;">Default</th>
+      <th style="text-align:center;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr >
+      <td >UPTIME_TXN_LIMIT_BROWSERS</td>
+      <td >3</td>
+      <td >The number of Chrome instances to run in this private location. Running more transaction checks will require more instances, and subsequently use more resources (CPU and Memory). A rough maximum for this is 3 Chrome instances per CPU core + 2GB RAM.</td>
+    </tr>
+    <tr>
+      <td >UPTIME_TXN_MAX_EXEC_TIME</td>
+      <td >65000</td>
+      <td >The maximum execution time of checks running in this private location. The default is usually sufficient unless you are running Extended Transaction checks whose runtime and timeout can exceed 60 seconds.</td>
+    </tr>
+    <tr>
+      <td >UPTIME_NAGIOS_SERVICE_CHECK_TIMEOUT</td>
+      <td >92000</td>
+      <td >The maximum execution time of any check running in this private location. The default is sufficient unless you have increased UPTIME_TXN_MAX_EXEC_TIME , in which case you should set this value slightly larger than that.</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 ## Upgrading from 3.x
