@@ -2,8 +2,6 @@
 
 Use this README for technical requirements and CLI-based commands and troubleshooting.
 
-**Note: You are viewing the README for the latest version.**
-
 ## Documentation for Different Versions
 
 - [v4.1 README](https://github.com/uptime-com/uptime-private-location/blob/master/README.md)
@@ -172,19 +170,6 @@ Check the status of a running container in a JSON payload via the CLI.
 
    If you have `jq` installed, you can get pretty output as well:
    `docker exec <PID_OF_THE_RUNNING_CONTAINER> /home/uptime/status.sh | jq`
-
-### Reducing Memory Usage
-
-By default the container allocates 3 chrome browsers per available CPU for running
-transaction and page speed checks. If you have more than 2 CPUs allocated and/or you
-don't run large numbers of these checks on the private location, this may use more memory
-than necessary.
-
-It is possble to limit the number of chrome browsers allocated by setting the
-`UPTIME_AVAILABLE_CPU_CORES` environment variable via the docker run command used
-to start the container. For example:
-
-`--env UPTIME_AVAILABLE_CPU_CORES=2`
 
 ### Create a `backup.tgz` log file for troubleshooting
 
