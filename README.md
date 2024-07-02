@@ -4,7 +4,7 @@ Use this README for technical requirements and CLI-based commands and troublesho
 
 ## Documentation for Different Versions
 
-- [v4.1 README](https://github.com/uptime-com/uptime-private-location/blob/master/README.md)
+- [v4.1 README](https://github.com/uptime-com/uptime-private-location/blob/v4.1/README.md)
 - [v4.0 README](https://github.com/uptime-com/uptime-private-location/blob/v4.0/README.md)
 - [v3.2 README](https://github.com/uptime-com/uptime-private-location/blob/v3.2/README.md)
 - [v3.0 README](https://github.com/uptime-com/uptime-private-location/blob/v3.0/README.md)
