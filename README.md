@@ -9,10 +9,10 @@ Use this README for technical requirements and CLI-based commands and troublesho
 - [Latest Version README](https://github.com/uptime-com/uptime-private-location/blob/master/README.md)
 - [v3.2 README](https://github.com/uptime-com/uptime-private-location/blob/v3.2/README.md)
 - [v3.0 README](https://github.com/uptime-com/uptime-private-location/blob/v3.0/README.md)
+
 ---
 
 For pre-container setup, account prerequisites, and UI-based support, see our article [Getting Started with Private Location Monitoring](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring).
-
 
 ## Technical Requirements
 
@@ -21,25 +21,23 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 - 2 CPU cores
 - Write permissions to the machine’s drive
 
-
 ## Prerequisites
 
 1. Docker v18+
 2. Linux Ubuntu 20.04+
 
-    a. **Please note**: Linux kernel 4.x or 5.x required; Windows Hosts (Docker host, WSL, or VirtualBox) are not officially supported.
+   a. **Please note**: Linux kernel 4.x or 5.x required; Windows Hosts (Docker host, WSL, or VirtualBox) are not officially supported.
 
 3. Access to Uptime.com private Docker repository (requested via Support, see [article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring#prerequisites_account)).
 
 4. API Token for each probe server (supplied via Support, see [article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring#prerequisites_pre_container)).
 
-
 ## Installation Instructions
 
-1. Retrieve latest stable image version [here](https://hub.docker.com/repository/docker/uptimecom/uptime-private-location/general).
-2. Login with Docker credentials via `docker login`
-3. Pull latest image via `docker pull uptimecom/uptime-private-location:X.Y`
-4. Start the container via
+1.  Retrieve latest stable image version [here](https://hub.docker.com/repository/docker/uptimecom/uptime-private-location/general).
+2.  Login with Docker credentials via `docker login`
+3.  Pull latest image via `docker pull uptimecom/uptime-private-location:X.Y`
+4.  Start the container via
 
         docker run --rm --detach \
             --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
@@ -56,6 +54,7 @@ Some reconfiguration or stalled check detection errors may occur, but these shou
 correct within ~1 hour after container start/restart.
 
 ### Older Docker Versions or Container Runtimes / Azure AKS
+
 If you're running a Docker version older than 20.03 (check with `docker --version`),
 you'll need to add the following parameter to the `docker run` command above:
 
@@ -67,6 +66,7 @@ Kubernetes on Azure AKS also requires a similar configuration at this time. Plea
 ## Environment Variables
 
 **Use --env for docker run or add as env in kubernetes yaml file**
+
 <table>
   <thead>
     <tr>
@@ -91,10 +91,13 @@ Kubernetes on Azure AKS also requires a similar configuration at this time. Plea
       <td >92000</td>
       <td >The maximum execution time of any check running in this private location. The default is sufficient unless you have increased UPTIME_TXN_MAX_EXEC_TIME , in which case you should set this value slightly larger than that.</td>
     </tr>
+        <tr>
+      <td >UPTIME_AVAILABLE_CPU_CORES</td>
+      <td >auto-detected</td>
+      <td >Specifies the number of CPU cores available to the Private Location container, auto-detected by default. This value is used for configuring check concurrency and internal status checks. We advise this value to be set accurately when running under Kubernetes or if the Private Location is reporting errors incorrectly (for example, reporting high load when the actual load is reasonable).</td>
+    </tr>
   </tbody>
 </table>
-
-
 
 ## Upgrading from 3.x
 
@@ -103,38 +106,35 @@ Please note the run command and k8s sample configuration both contain important 
 compared to version 3.x and will need to be updated per this document and the corresponding
 example files.
 
-
 ## Upgrading from 2.x
 
 If you're currently running the 2.x line of Private Locations, there are some significant changes
 in this version which should be taken in consideration:
 
 - **IMPORTANT!** The data format has changed, so **you must** delete any existing volumes from 2.x and start
-fresh when running 3.x for the first time.
+  fresh when running 3.x for the first time.
 
 - The `https://localhost:8003/status` URL no longer exists in 3.x, as it is not suitable for
-monitoring whether a Private Location is fully functional. For monitoring, we recommend you use
-one or more Heartbeat checks on Uptime.com, combined with a HTTP/API/Transaction check running
-on the private location which hits the Heartbeat URL. It is still possible to run the status
-script via the CLI as described below.
+  monitoring whether a Private Location is fully functional. For monitoring, we recommend you use
+  one or more Heartbeat checks on Uptime.com, combined with a HTTP/API/Transaction check running
+  on the private location which hits the Heartbeat URL. It is still possible to run the status
+  script via the CLI as described below.
 
 - The new version runs as UID=1000, rather than UID=0 (`root`) that the 2.x line ran as. Please
-refrain from running it as a different user as it will fail. Ideally it should not be necessary
-to specify which UID to run as, it will default to the correct user.
+  refrain from running it as a different user as it will fail. Ideally it should not be necessary
+  to specify which UID to run as, it will default to the correct user.
 
 - It is **no longer necessary or recommended** to provide `--security-opt seccomp=./seccomp-config.json`
-when running this new version. Please ensure you remove this from the startup command.
+  when running this new version. Please ensure you remove this from the startup command.
 
 - Running Virus/Malware checks in a private location is no longer supported. This check does
-not require any access to internal resources, so there is no benefit from running it from
-a private location.
-
+  not require any access to internal resources, so there is no benefit from running it from
+  a private location.
 
 ### Using a Proxy Server
 
 To connect to a proxy server, make sure that the proxy is configured in the Docker client as described in the [Official Docker Guide](https://docs.docker.com/network/proxy/).
 Once configured, confirm that the container can access `internal.uptime.com:443` as well as `https://sqs.us-east-2.amazonaws.com/`
-
 
 ## Usage Commands (via CLI)
 
@@ -142,7 +142,6 @@ Once configured, confirm that the container can access `internal.uptime.com:443`
 
 1. Get the PID of a running container via `docker ps`
 2. Run `docker stop <PID_OF_THE_RUNNING_CONTAINER>`
-
 
 ### Update to Latest Image
 
@@ -152,16 +151,17 @@ Once configured, confirm that the container can access `internal.uptime.com:443`
 2. Login via `docker login`
 3. Run `docker pull uptimecom/uptime-private-location:X.Y`
 
-
 ## Troubleshooting
 
 ### Viewing Startup Logs
+
 You can view the logs of the container's startup sequence to help diagnose errors.
 
 1. Get the PID of a running container via `docker ps`
 2. Run `docker logs -f <PID_OF_THE_RUNNING_CONTAINER>`
 
 ### Getting Private Location Status (via CLI)
+
 Check the status of a running container in a JSON payload via the CLI.
 
 **Note:** It is expected that some of these checks may fail upon start/restart, and they should clear within 60 minutes.
@@ -172,8 +172,8 @@ Check the status of a running container in a JSON payload via the CLI.
    If you have `jq` installed, you can get pretty output as well:
    `docker exec <PID_OF_THE_RUNNING_CONTAINER> /home/uptime/status.sh | jq`
 
-
 ### Reducing Memory Usage
+
 By default the container allocates 3 chrome browsers per available CPU for running
 transaction and page speed checks. If you have more than 2 CPUs allocated and/or you
 don't run large numbers of these checks on the private location, this may use more memory
@@ -186,14 +186,14 @@ to start the container. For example:
 `--env UPTIME_AVAILABLE_CPU_CORES=2`
 
 ### Create a `backup.tgz` log file for troubleshooting
+
 1. Get the PID of a running container via `docker ps`
 2. Run `docker run --rm --volumes-from <RUNNING_CONTAINER_PID> -v $(pwd):/backup ubuntu:latest tar -zcvf /backup/backup.tgz /home/uptime/logs /usr/local/nagios/etc /usr/local/nagios/var`
 3. Send the log file tarball to Uptime.com support for analysis.
 
-
 ### Further Assistance
-For further troubleshooting help, see our [support article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring) or contact <support@uptime.com>
 
+For further troubleshooting help, see our [support article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring) or contact <support@uptime.com>
 
 ## Running in Kubernetes
 
