@@ -23,15 +23,18 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 ## Prerequisites
 
 1. Docker v18+
-2. Linux Ubuntu 20.04+
+2. Linux Ubuntu 20.04+ / PhotonOS 5.x
 
    a. **Please note**: Linux kernel 4.x or 5.x required; Windows Hosts (Docker host, WSL, or VirtualBox) are not officially supported.
+
 
 3. Access to Uptime.com private Docker repository (requested via Support, see [article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring#prerequisites_account)).
 
 4. API Token for each probe server (supplied via Support, see [article](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring#prerequisites_pre_container)).
 
 ## Installation Instructions
+
+**Linux Ubuntu 20.04+**
 
 1.  Retrieve latest stable image version [here](https://hub.docker.com/repository/docker/uptimecom/uptime-private-location/general).
 2.  Login with Docker credentials via `docker login`
@@ -47,6 +50,36 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
             --tmpfs /home/uptime/run:uid=1000,gid=1000 \
             --hostname localhost \
             uptimecom/uptime-private-location:X.Y
+
+  **PhotonOS 5.x**
+  ###### Deploying PhotonOS with Docker-in-Docker Setup
+
+  Vmware provides an official docker image of [Photon OS](https://hub.docker.com/_/photon)
+
+      docker pull photon
+      sudo docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock photon:latest
+  ###### Installing Docker Inside PhotonOS Container
+
+      tdnf install -y docker
+      systemctl start docker
+      systemctl enable docker
+
+  ###### Start the container via
+
+        docker run --rm --detach \
+            --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+            --shm-size=2048m \
+            --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
+            --mount type=volume,dst=/home/uptime/var,src=uptime-var \
+            --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
+            --tmpfs /home/uptime/run:uid=1000,gid=1000 \
+            --hostname localhost \
+            uptimecom/uptime-private-location:X.Y
+
+
+
+
+
 
 **Please note**: Directly following container start, some tasks need time to settle.
 Some reconfiguration or stalled check detection errors may occur, but these should
@@ -158,6 +191,15 @@ You can view the logs of the container's startup sequence to help diagnose error
 
 1. Get the PID of a running container via `docker ps`
 2. Run `docker logs -f <PID_OF_THE_RUNNING_CONTAINER>`
+
+### Accesing Application Logs
+
+You can view the application logs inside the container.
+
+1. Get the PID of a running container via `docker ps`
+2. sudo docker exec -it "container-id" /bin/bash
+3. Logs are located at /home/uptime/logs/ example command:          
+          `tail -f /home/uptime/logs/taskqueue.log`
 
 ### Getting Private Location Status (via CLI)
 
