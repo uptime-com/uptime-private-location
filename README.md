@@ -106,7 +106,6 @@ Kubernetes on Azure AKS also requires a similar configuration at this time. Plea
       <th style="text-align:center;">Default</th>
       <th style="text-align:center;">Description</th>
     </tr>
-  </thead>
   <tbody>
     <tr >
       <td >UPTIME_TXN_LIMIT_BROWSERS</td>
@@ -181,7 +180,7 @@ Once configured, confirm that the container can access `internal.uptime.com:443`
 
 1. Check for the latest version number at [Dockerhub](https://hub.docker.com/repository/docker/uptimecom/uptime-private-location/tags?page=1&ordering=last_updated)
 2. Login via `docker login`
-3. Run `docker pull uptimecom/uptime-private-location:X.Y`
+3. Run `docker pull uptimecom/uptime-private-location:latest`
 
 ## Troubleshooting
 
@@ -231,28 +230,3 @@ checks will fail to run.
 
 A sample kubernetes configuration for the private location is available in
 `k8s-sample.yaml` for your reference.
-
-### Kubernetes Troubleshooting
-
-If you receive errors from the pod's log file indicating that apache failed to start
-(e.g. `gave up: apache entered FATAL state`), try adding an additional `securityContext`
-setting to your kubernetes yaml file, before `containers:`
-
-    spec:
-      ...
-
-      template:
-        ...
-
-        spec:
-          volumes:
-            ...
-
-          # *** Add this section *** #
-          securityContext:
-            sysctls:
-              - name: net.ipv4.ip_unprivileged_port_start
-                value: "0"
-
-          containers:
-            ...

@@ -8,4 +8,4 @@ docker run --rm --detach \
     --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
     --tmpfs /home/uptime/run:uid=1000,gid=1000 \
     --hostname localhost \
-    uptimecom/uptime-private-location:4.0
+    uptimecom/uptime-private-location:latest
