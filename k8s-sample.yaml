@@ -72,3 +72,5 @@ spec:
               value: "your-api-token"
             - name: UPTIME_AVAILABLE_CPU_CORES
               value: "2"
+            - name: UPTIME_TXN_LIMIT_BROWSERS
+              value: "1"
