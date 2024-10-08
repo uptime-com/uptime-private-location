@@ -49,7 +49,7 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
             --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
             --tmpfs /home/uptime/run:uid=1000,gid=1000 \
             --hostname localhost \
-            uptimecom/uptime-private-location:X.Y
+            uptimecom/uptime-private-location:latest
 
   **PhotonOS 5.x**
   ###### Deploying PhotonOS with Docker-in-Docker Setup
