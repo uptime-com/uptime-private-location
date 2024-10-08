@@ -38,9 +38,8 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 **Linux Ubuntu 20.04+**
 
 1.  Retrieve latest stable image version [here](https://hub.docker.com/repository/docker/uptimecom/uptime-private-location/general).
-2.  Login with Docker credentials via `docker login`
-3.  Pull latest image via `docker pull uptimecom/uptime-private-location:X.Y`
-4.  Start the container via
+2.  Pull latest image via `docker pull uptimecom/uptime-private-location:latest`
+3.  Start the container via
 
         docker run --rm --detach \
             --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
@@ -75,7 +74,7 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
             --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
             --tmpfs /home/uptime/run:uid=1000,gid=1000 \
             --hostname localhost \
-            uptimecom/uptime-private-location:X.Y
+            uptimecom/uptime-private-location:latest
 
 
 
