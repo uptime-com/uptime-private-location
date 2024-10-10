@@ -109,12 +109,6 @@ sudo apt-get update
 sudo apt-get -y install podman
 ```
 
-Log in to Docker.io to pull the image:
-
-```bash
-podman login docker.io
-```
-
 You will be prompted to enter your Docker credentials.
 
 Pull the latest Uptime.com private location image:
@@ -126,7 +120,7 @@ podman pull docker.io/uptimecom/uptime-private-location:latest
 Once Podman is installed, you can run the Uptime.com private location container with the following script:
 
 ```bash
-docker run --rm --detach \
+podman run --rm --detach \
     --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
     --shm-size=2048m \
     --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
