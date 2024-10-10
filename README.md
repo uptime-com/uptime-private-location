@@ -77,10 +77,6 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
             uptimecom/uptime-private-location:latest
 
 
-
-
-
-
 **Please note**: Directly following container start, some tasks need time to settle.
 Some reconfiguration or stalled check detection errors may occur, but these should
 correct within ~1 hour after container start/restart.
@@ -94,6 +90,72 @@ you'll need to add the following parameter to the `docker run` command above:
 
 Kubernetes on Azure AKS also requires a similar configuration at this time. Please see the
 `k8s-sample.yaml` file and [Kubernetes section](#kubernetes-troubleshooting) below for details.
+
+
+### Running in Podman
+
+Private Location Monitoring can also run in Podman, a Docker alternative.
+
+#### Prerequisites
+1. Podman v4.x.x+
+2. Linux Ubuntu 20.04+
+
+Installing Podman on Linux Ubuntu 20.04+
+
+Update your system and install Podman:
+
+```bash
+sudo apt-get update
+sudo apt-get -y install podman
+```
+
+You will be prompted to enter your Docker credentials.
+
+Pull the latest Uptime.com private location image:
+
+```bash
+podman pull docker.io/uptimecom/uptime-private-location:latest
+```
+
+Once Podman is installed, you can run the Uptime.com private location container with the following script:
+
+```bash
+podman run --rm --detach \
+    --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+    --shm-size=2048m \
+    --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
+    --mount type=volume,dst=/home/uptime/var,src=uptime-var \
+    --mount type=volume,dst=/home/uptime/logs,src=uptime-logs \
+    --tmpfs /home/uptime/run \
+    --hostname localhost \
+    uptimecom/uptime-private-location:latest
+```
+
+### Running PLM on Windows Server
+
+While Private Location Monitoring is not officially supported on Windows, you can run it through WSL 2 on Windows Server 2022.
+(Note: You will need a dedicated server or a Windows VM server that supports nested virtualization to enable WSL 2 or Hyper-V.)
+
+#### Running on Windows Server 2022 (with WSL 2)
+
+To run Uptime.com Private Location Monitoring on Windows Server 2022, you need to enable WSL 2 and install a supported Linux distribution (e.g., Ubuntu 20.04):
+
+1. Install WSL 2: Open PowerShell as Administrator and run:
+
+```bash
+wsl --install
+```
+
+2. Install a Linux distribution: Choose Ubuntu 20.04 LTS:
+
+```bash
+wsl --install -d Ubuntu-20.04
+```
+
+3. Set up Docker: Inside the WSL 2 terminal (Ubuntu), follow the [instructions](#installation-instructions) to install Docker.
+
+For Windows Server 2019, since WSL 2 is not supported, you can use a Hyper-V Ubuntu VM to run it following the same procedure for Docker.
+
 
 ## Environment Variables
 
@@ -197,7 +259,7 @@ You can view the application logs inside the container.
 
 1. Get the PID of a running container via `docker ps`
 2. sudo docker exec -it "container-id" /bin/bash
-3. Logs are located at /home/uptime/logs/ example command:          
+3. Logs are located at /home/uptime/logs/ example command:
           `tail -f /home/uptime/logs/taskqueue.log`
 
 ### Getting Private Location Status (via CLI)
