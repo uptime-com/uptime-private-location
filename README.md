@@ -195,6 +195,7 @@ For Windows Server 2019, since WSL 2 is not supported, you can use a Hyper-V Ubu
 ## Ports
 
 External ports for inbound and outbound: 80 and 443.
+
 Internal container pors: 8080, 8443 and 5666.
 
 ## Upgrading from 3.x
