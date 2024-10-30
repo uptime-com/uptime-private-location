@@ -194,7 +194,9 @@ For Windows Server 2019, since WSL 2 is not supported, you can use a Hyper-V Ubu
 
 ## Ports
 
-External ports for inbound and outbound: 80 and 443.
+External ports for outbout: 80 and 443.
+
+External Port for inbound: 443 ** Optional: only for connection to Nagios UI **
 
 Internal container pors: 8080, 8443 and 5666.
 
