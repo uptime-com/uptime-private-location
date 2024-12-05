@@ -4,6 +4,7 @@ Use this README for technical requirements and CLI-based commands and troublesho
 
 ## Documentation for Different Versions
 
+- [v5.0 README](https://github.com/uptime-com/uptime-private-location/blob/v5.0/README.md)
 - [v4.2 README](https://github.com/uptime-com/uptime-private-location/blob/v4.2/README.md)
 - [v4.1 README](https://github.com/uptime-com/uptime-private-location/blob/v4.1/README.md)
 - [v4.0 README](https://github.com/uptime-com/uptime-private-location/blob/v4.0/README.md)
@@ -13,6 +14,9 @@ Use this README for technical requirements and CLI-based commands and troublesho
 ---
 
 For pre-container setup, account prerequisites, and UI-based support, see our article [Getting Started with Private Location Monitoring](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring).
+
+## v5.0 
+**Added support for vault credentials**
 
 ## Technical Requirements
 
