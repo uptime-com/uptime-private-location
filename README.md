@@ -15,7 +15,7 @@ Use this README for technical requirements and CLI-based commands and troublesho
 
 For pre-container setup, account prerequisites, and UI-based support, see our article [Getting Started with Private Location Monitoring](https://support.uptime.com/hc/en-us/articles/360012622239-Getting-Started-with-Private-Location-Monitoring).
 
-## v5.0 
+## v5.0
 **Added support for vault credentials**
 
 ## Technical Requirements
@@ -239,7 +239,8 @@ in this version which should be taken in consideration:
 ### Using a Proxy Server
 
 To connect to a proxy server, make sure that the proxy is configured in the Docker client as described in the [Official Docker Guide](https://docs.docker.com/network/proxy/).
-Once configured, confirm that the container can access `internal.uptime.com:443` as well as `https://sqs.us-east-2.amazonaws.com/`
+Once configured, confirm that the container can access `internal.uptime.com:443`,
+`credentials.produs.upsentinel.net:443`, and also `https://sqs.us-east-2.amazonaws.com/`.
 
 ## Usage Commands (via CLI)
 
