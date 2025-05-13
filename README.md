@@ -45,8 +45,9 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 2.  Pull latest image via `docker pull uptimecom/uptime-private-location:latest`
 3.  Start the container via
 
-        docker run --rm --detach \
+        docker run --detach \
             --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+            --restart unless-stopped \
             --shm-size=2048m \
             --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
             --mount type=volume,dst=/home/uptime/var,src=uptime-var \
@@ -54,6 +55,15 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
             --tmpfs /home/uptime/run:uid=1000,gid=1000 \
             --hostname localhost \
             uptimecom/uptime-private-location:latest
+
+4.  If you need to stop and remove the container (e.g. to reset it):
+
+        # Find the container's ID
+        docker ps
+
+        # Stop & remove the container & any related anonymous volumes
+        docker rm -fv <container-id>
+
 
   **PhotonOS 5.x**
   ###### Deploying PhotonOS with Docker-in-Docker Setup
@@ -70,8 +80,9 @@ For pre-container setup, account prerequisites, and UI-based support, see our ar
 
   ###### Start the container via
 
-        docker run --rm --detach \
+        docker run --detach \
             --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+            --restart unless-stopped \
             --shm-size=2048m \
             --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
             --mount type=volume,dst=/home/uptime/var,src=uptime-var \
@@ -124,8 +135,9 @@ podman pull docker.io/uptimecom/uptime-private-location:latest
 Once Podman is installed, you can run the Uptime.com private location container with the following script:
 
 ```bash
-podman run --rm --detach \
+podman run --detach \
     --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+    --restart unless-stopped \
     --shm-size=2048m \
     --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
     --mount type=volume,dst=/home/uptime/var,src=uptime-var \
