@@ -1,4 +1,4 @@
-# Uptime.com Private Location Monitoring Management
+# Uptime.com Private Location Monitoring (PLM)
 
 Use this README for technical requirements and CLI-based commands and troubleshooting.
 
@@ -372,7 +372,7 @@ A sample kubernetes configuration for the private location is available in
 
 ## Running in Docker Compose
 
-It is possible to run the privaye location with Docker Compose. A sample configuration
+It is possible to run the private location with Docker Compose. A sample configuration
 is provided in `compose-sample.yaml` for your reference.
 
 
