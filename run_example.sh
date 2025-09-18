@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 docker run --detach \
-    --restart unless-stopped
     --env UPTIME_API_TOKEN="<YOUR_UPTIME_API_TOKEN>" \
+    --restart unless-stopped \
     --shm-size=2048m \
     --mount type=volume,dst=/usr/local/nagios/var,src=uptime-nagios-var \
     --mount type=volume,dst=/home/uptime/var,src=uptime-var \

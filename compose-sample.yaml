@@ -1,0 +1,32 @@
+name: "uptime-plm"
+
+# Uncomment this to enable IPv6 networking
+# Requires Docker daemon configuration changes, see README.md
+# networks:
+#   default:
+#     enable_ipv6: true
+#     ipam:
+#       config:
+#         - subnet: fd00:abcf::/64
+
+volumes:
+  plm-nagios-var:
+  plm-logs:
+  plm-var:
+
+services:
+  plm:
+    image: "uptimecom/uptime-private-location:latest"
+    pull_policy: always
+    environment:
+      # !!TODO!! Set your Uptime.com Private Location API token here
+      UPTIME_API_TOKEN: "<YOUR_UPTIME_API_TOKEN>"
+    shm_size: 2048m
+    hostname: localhost
+    restart: unless-stopped
+    tmpfs:
+      - /home/uptime/run:uid=1000,gid=1000
+    volumes:
+      - plm-nagios-var:/usr/local/nagios/var
+      - plm-logs:/home/uptime/logs
+      - plm-var:/home/uptime/var
