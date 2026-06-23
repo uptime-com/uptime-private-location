@@ -377,6 +377,11 @@ is provided in `compose-sample.yaml` for your reference.
 
 
 ## Changelog
+### 5.4
+- Replace system cron to remove setuid/root user dependency
+- Chrome version upgrade to 147
+- Vault credentials improvements
+
 ### 5.3
 - Support for RDAP check
 - Chome version upgrade to 139
