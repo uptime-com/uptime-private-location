@@ -377,6 +377,9 @@ is provided in `compose-sample.yaml` for your reference.
 
 
 ## Changelog
+### 5.5
+- Alerts are no longer lost when check output ends with a backslash
+
 ### 5.4
 - Replace system cron to remove setuid/root user dependency
 - Chrome version upgrade to 147
