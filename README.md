@@ -377,6 +377,14 @@ is provided in `compose-sample.yaml` for your reference.
 
 
 ## Changelog
+
+### 5.6
+
+* Security: Updated Ubuntu 22.04 PHP 8.1 packages to
+  8.1.2-1ubuntu2.28, addressing CVE-2026-109618
+  and CVE-2026-109619.
+* Includes additional Ubuntu security and maintenance updates.
+
 ### 5.5
 - Alerts are no longer lost when check output ends with a backslash
 
